@@ -24,17 +24,19 @@ public class ClassHandlerConverter {
 
                 var value = field.get(father);
 
-                if (value == null || isNotMeasurementConvertItem(field)) continue;
+                if (value == null ) continue;
 
-                if (allowToPerformConversion(field)) {
-                    var newValue = convertSingle(field, value, systemType, father);
+                if (isList(field)) {
+                    var newValue = convertList(field, value, systemType, father);
                     field.setAccessible(true);
                     field.set(father, newValue);
                     continue;
                 }
 
-                if (isList(field)) {
-                    var newValue = convertList(field, value, systemType, father);
+                if (isNotMeasurementConvertItem(field)) continue;
+
+                if (allowToPerformConversion(field)) {
+                    var newValue = convertSingle(field, value, systemType, father);
                     field.setAccessible(true);
                     field.set(father, newValue);
                     continue;

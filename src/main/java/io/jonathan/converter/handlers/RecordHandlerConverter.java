@@ -34,19 +34,23 @@ public class RecordHandlerConverter {
                 types[index] = field.getType();
                 var value = component.getAccessor().invoke(father);
 
-                if (value == null || isNotMeasurementConvertItem(field)) {
+                if (value == null) {
                     args[index] = value;
-                    continue;
-                }
-
-                if (allowToPerformConversion(field)) {
-                    var newValue = convertSingle(field, value, systemType, father);
-                    args[index] = newValue;
                     continue;
                 }
 
                 if (isList(field)) {
                     var newValue = convertList(field, value, systemType, father);
+                    args[index] = newValue;
+                    continue;
+                }
+
+                if (allowToPerformConversion(field)) {
+                    if (isNotMeasurementConvertItem(field)) {
+                        args[index] = value;
+                        continue;
+                    }
+                    var newValue = convertSingle(field, value, systemType, father);
                     args[index] = newValue;
                     continue;
                 }
