@@ -27,7 +27,9 @@ public enum Measurement {
     POUNDS_PER_SQUARE_INCH("PSI"),
     HECTARES_PER_HOUR("ha/h"),
     ACRES_PER_HOUR("acre/h"),
-    SQUARE_METERS_PER_HOUR("m²/h");
+    SQUARE_METERS_PER_HOUR("m²/h"),
+    PLANTS_PER_HECTARE("pl/ha"),
+    PLANTS_PER_ACRE("pl/ac");
 
     public final String symbol;
 

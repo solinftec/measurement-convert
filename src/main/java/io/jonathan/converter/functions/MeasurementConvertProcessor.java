@@ -34,6 +34,7 @@ public class MeasurementConvertProcessor {
         registerConversionFunctions(new HectaresHoursAcresHours());
         registerConversionFunctions(new SquareMetersHoursAcresHours());
         registerConversionFunctions(new SquareMetersHoursHectaresHours());
+        registerConversionFunctions(new PlantsPerHectarePlantsPerAcre());
     }
 
     public static void registerConversionFunctions(MeasurementConvertFunction measurementConvertFunction) {
