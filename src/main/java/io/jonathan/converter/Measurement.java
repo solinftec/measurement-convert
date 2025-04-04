@@ -29,7 +29,10 @@ public enum Measurement {
     ACRES_PER_HOUR("acre/h"),
     SQUARE_METERS_PER_HOUR("m²/h"),
     PLANTS_PER_HECTARE("pl/ha"),
-    PLANTS_PER_ACRE("pl/ac");
+    PLANTS_PER_ACRE("pl/ac"),
+    VOLT("V"),
+    WATT("W"),
+    METERS_PER_SECOND("m/s");
 
     public final String symbol;
 
