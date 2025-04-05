@@ -1,0 +1,44 @@
+name: run-test
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  test:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up JDK 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: Cache Maven dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.m2/repository
+            ~/.mvn/wrapper
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml', '**/.mvn/wrapper/maven-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      - name: Configure Maven settings
+        env:
+          MAVEN_SETTINGS_XML: ${{ secrets.MAVEN_SETTINGS_XML }}
+        run: |
+          if [ -z "$MAVEN_SETTINGS_XML" ]; then
+          echo "Erro: O segredo MAVEN_SETTINGS_XML não foi configurado ou está vazio."
+          exit 1
+          fi
+          echo -e "$MAVEN_SETTINGS_XML" > settings.xml
+          ls -lh settings.xml
+          echo "Tamanho do segredo MAVEN_SETTINGS_XML: ${#MAVEN_SETTINGS_XML}"
+
+      - name: Build with Maven (local)
+        run: mvn deploy -s settings.xml
