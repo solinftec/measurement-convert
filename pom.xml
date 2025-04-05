@@ -45,7 +45,7 @@
         <repository>
             <id>github</id>
             <name>GitHub OWNER Apache Maven Packages</name>
-            <url>https://maven.pkg.github.com/jonathan-sh/measurement-convert</url>
+            <url>https://maven.pkg.github.com/solinftec/measurement-convert</url>
         </repository>
     </distributionManagement>
 </project>
